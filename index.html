@@ -1,11 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Page Title</title>
+<title>Web Notepad</title>
+
+<script>
+
+    var name = "joseph noifa";
+    var serverSave = "https://apply.switchmaven.com/api/save";
+    var serverRetrieve = "https://apply.switchmaven.com/api/retrieve?name=" + name;
+    
+
+
+
+
+    function click_save_button() {
+        // retrieve the screen name & notes from the page.
+        screen_name = document.getElementById("input-screenname");
+        note = document.getElementById("input-note");
+        // Debug the retrieve values.
+        console.log(screen_name.value);
+        console.log(note.value);
+        // create JSON object to store the name & notes.
+        var data = {"name": screen_name.value, "note": note.value};
+        // Console the JSON data object.
+        console.log(data);
+        // Send the notes to server.
+        const xhr = new XMLHttpRequest();
+
+        // listen for `load` event
+        xhr.onload = () => {
+
+            // print JSON response
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // parse JSON
+                // const response = JSON.parse(xhr.responseText);
+                // console.log(response);
+                console.log("Done successfully.")
+            }
+        };
+
+        // open request
+        xhr.open('POST', serverSave);
+
+        // set `Content-Type` header
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        // send rquest with JSON payload
+        xhr.send(JSON.stringify(data));
+
+    }
+
+
+
+
+
+
+    function click_retrieve() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Show the retrieve note on screen.
+                alert(xhttp.responseText);
+            }
+        };
+        xhttp.open("GET", serverRetrieve, true);
+        xhttp.send();
+    }
+
+
+
+
+
+
+</script>
+
 </head>
 <body>
 
 <h1>Web Notepad</h1>
-<p>Testing 123</p>
+Screen Name: <br/><input id="input-screenname" width="300" style="padding: 0.5rem;"><br/><br/>
+Notes: <br/><textarea id="input-note" cols="70" rows="10" style="padding: 0.5rem;"></textarea><br/><br/>
+<input id="btn-save" type="button" value="Save" onclick="click_save_button()">&nbsp;&nbsp;&nbsp;
+<input id="btn-retrieve" type="button" value="Retrieve Last" onclick="click_retrieve()">
 </body>
 </html>
