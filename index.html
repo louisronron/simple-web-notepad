@@ -3,16 +3,19 @@
 <head>
 <title>Web Notepad</title>
 
+
+
 <script>
 
+
+
+    // declare some variables here.
     var name = "joseph noifa";
     var serverSave = "https://apply.switchmaven.com/api/save";
     var serverRetrieve = "https://apply.switchmaven.com/api/retrieve?name=" + name;
-    
 
 
-
-
+    /* do something on click of SAVE BUTTON */
     function click_save_button() {
         // retrieve the screen name & notes from the page.
         screen_name = document.getElementById("input-screenname");
@@ -55,6 +58,8 @@
 
 
 
+
+    /* Do something on click of RETRIEVE LAST button*/
     function click_retrieve() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -73,14 +78,16 @@
 
 
 </script>
-
 </head>
-<body>
 
+
+
+
+<body>
 <h1>Web Notepad</h1>
 Screen Name: <br/><input id="input-screenname" width="300" style="padding: 0.5rem;"><br/><br/>
 Notes: <br/><textarea id="input-note" cols="70" rows="10" style="padding: 0.5rem;"></textarea><br/><br/>
 <input id="btn-save" type="button" value="Save" onclick="click_save_button()">&nbsp;&nbsp;&nbsp;
 <input id="btn-retrieve" type="button" value="Retrieve Last" onclick="click_retrieve()">
 </body>
-</html>
+</html> 
